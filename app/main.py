@@ -159,18 +159,6 @@ for i in range(10):
     print("")
 display(m)
 
-'''
-kern = GPy.kern.MLP(5) + GPy.kern.Bias(1) +GPy.kern.sde_StdPeriodic(input_dim=5)
-m2 = GPy.models.GPHeteroscedasticRegression(X_train_, y_train_,kern)
-m2.optimize()
-for i in range(20):
-    m2.optimize('bfgs', max_iters=3000) #first runs EP and then optimizes the kernel parameters
-    print('iteration:', i,)
-    print(m)
-    print("")
-y_test[:10]
-'''
-
 y_predict_gpy = m.predict(X_test)
 quantiles = m.predict_quantiles(X_test)
 y_predict_gpy[:5]
@@ -246,16 +234,8 @@ df_
 data = [trace_high,trace_low,trace_yhat, trace_data]
 iplot(data, filename = 'filling-interior-area')
 
-df_.columns
 
 
-#iplot([table], filename='table-of-mining-data')
-'''
-def metrica_pancho(y_prueba, y_predecida):
-    resta = y_prueba - y_predecida
-    resta = abs(resta)
-    return sum(resta)/len(y_prueba)
-'''
 mean_squared_error(y_test, y_pred)
 mean_squared_error(y_test, y_pred_clf)
 mean_squared_error(y_test, y_pred_gp)
@@ -263,17 +243,11 @@ mean_squared_error(y_test, y_pred_rforest)
 mean_squared_error(y_test, y_predict_nn)
 #32 sin kernel periodico
 mean_squared_error(y_test, y_predict_gpy)
-#semanas desde transplante  + mlp 0.28778474564180645
-#SIN semanas desde trasplante + mlp 0.2949808818147355
-#SIN semanas desde trasnplante + kk 0.2689871738193314
-#con semanas desde trasplante + KK 0.2864149916162263
-#con semanas desde trasplante + ker 0.28778765989850036
-#sin semanas desde trasplante + ker 0.2798044839988994
+
 
 np.reshape(y_predict_gpy,0)
 y_gpy.shape
 
-metrica_pancho(y_test, y_gpy)
 
 
 y_unnorm = y_test[:20]*std+mean
